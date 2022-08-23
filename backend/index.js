@@ -35,6 +35,25 @@ app.get('/read',async (req , res) => {
     })
 })
 
+
+app.put('/update' , async (req , res) => {
+    const newfoodname = req.body.newfoodname
+    const id = req.body.id
+
+
+    try{
+        await foodmodel.findById(id, (err , updatedfood) => {
+            updatedfood.foodname = newfoodname
+            updatedfood.save()
+            res.send('update')
+        })
+    }catch(err){
+        console.log(err)
+    }
+    
+})
+
+
 app.listen(4000, () => {
     console.log("server running on port 4000...")
 })

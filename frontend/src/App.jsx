@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
   const [foodname , setFoodName] = useState('')
+  const [newfoodname , setNewFoodName] = useState('')
   const [days , setDays] = useState(0)
   const[foodlist , setFoodlist] = useState([])
 
@@ -18,6 +19,13 @@ function App() {
     Axios.post("http://localhost:4000/insert",{
       foodname:foodname,
       days:days,
+    });
+  };
+
+  const updatefood = (id) =>{
+    Axios.put("http://localhost:4000/update",{
+      id: id,
+      newfoodname: newfoodname,
     });
   };
 
@@ -41,8 +49,18 @@ function App() {
       }} 
       />
       <button onClick={addToList}>Add to List</button>
+
       <h1>FoodList</h1>
-      {foodlist.map((val , key) => { return <div><h1>{val.foodname}</h1> <h2>{val.daysSinceIAte}</h2></div> })}
+      {foodlist.map((val , key) => 
+      { 
+        return (
+        <div key={key} className="food">
+          <h1>{val.foodname}</h1> <h1>{val.daysSinceIAte}</h1>
+          <input type="text" onChange={(event) =>{ setNewFoodName(event.target.value) }}  placeholder="new food name..." />
+          <button onClick={() => updatefood(val._id)}>Update</button>
+          <button>Delete</button>
+          </div>)  
+        })}
     </div>
   );
 }
