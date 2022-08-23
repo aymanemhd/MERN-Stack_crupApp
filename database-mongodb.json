@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "6303707ec142ff0926df9b71"
+  },
+  "foodname": "orange",
+  "daysSinceIAte": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6304e138c0f260dcdd894574"
+  },
+  "foodname": "banana",
+  "daysSinceIAte": 3,
+  "__v": 0
+}]
