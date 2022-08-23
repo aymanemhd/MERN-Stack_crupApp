@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import Axios from 'axios'
 import './App.css';
 
 function App() {
-  const [foodname , setFoodName]=useState('')
-  const [days , setDays]=useState(0)
+  const [foodname , setFoodName] = useState('')
+  const [days , setDays] = useState(0)
+  const[foodlist , setFoodlist] = useState([])
+
+  useEffect(() =>{
+    Axios.get("http://localhost:4000/read").then((response) => {
+      setFoodlist(response.data)
+    });
+  }, [])
+
 
   const addToList = () =>{
     Axios.post("http://localhost:4000/insert",{
@@ -12,6 +20,7 @@ function App() {
       days:days,
     });
   };
+
 
 
   return (
@@ -32,6 +41,8 @@ function App() {
       }} 
       />
       <button onClick={addToList}>Add to List</button>
+      <h1>FoodList</h1>
+      {foodlist.map((val , key) => { return <div><h1>{val.foodname}</h1> <h2>{val.daysSinceIAte}</h2></div> })}
     </div>
   );
 }

@@ -26,7 +26,14 @@ app.post('/insert' , async (req , res) => {
 })
 
 
-
+app.get('/read',async (req , res) => {
+    foodmodel.find({},(err,resultat) =>{
+        if(err){
+            res.send(err)
+        }
+        res.send(resultat)
+    })
+})
 
 app.listen(4000, () => {
     console.log("server running on port 4000...")
