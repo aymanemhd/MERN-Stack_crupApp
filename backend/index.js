@@ -54,6 +54,15 @@ app.put('/update' , async (req , res) => {
 })
 
 
+
+app.delete('/delete/:id' , async (req , res) => {
+    const id = req.params.id
+    await foodmodel.findByIdAndRemove(id).exec()
+    res.send("deleted")
+    
+})
+
+
 app.listen(4000, () => {
     console.log("server running on port 4000...")
 })

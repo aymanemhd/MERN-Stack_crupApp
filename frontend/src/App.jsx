@@ -29,6 +29,8 @@ function App() {
     });
   };
 
+  const deletefood = (id) =>{ Axios.delete(`http://localhost:4000/delete/${id}`) };
+
 
 
   return (
@@ -58,7 +60,7 @@ function App() {
           <h1>{val.foodname}</h1> <h1>{val.daysSinceIAte}</h1>
           <input type="text" onChange={(event) =>{ setNewFoodName(event.target.value) }}  placeholder="new food name..." />
           <button onClick={() => updatefood(val._id)}>Update</button>
-          <button>Delete</button>
+          <button onClick={() => deletefood(val._id)}>Delete</button>
           </div>)  
         })}
     </div>
